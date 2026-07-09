@@ -24,8 +24,8 @@ function MatchIcon() {
       className="h-10 w-10"
       aria-hidden="true"
     >
-      <path d="M12 3l1.8 4.6L18 9l-4.2 1.4L12 15l-1.8-4.6L6 9l4.2-1.4L12 3z" />
-      <circle cx="18" cy="18" r="3" />
+      <rect x="3" y="4" width="12" height="15" rx="1.5" />
+      <rect x="9" y="8" width="12" height="15" rx="1.5" />
     </svg>
   );
 }
