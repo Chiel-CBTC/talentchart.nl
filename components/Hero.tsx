@@ -1,7 +1,19 @@
+import Image from "next/image";
+
 export default function Hero() {
   return (
-    <section className="bg-navy text-white">
-      <div className="mx-auto flex max-w-5xl flex-col items-start gap-6 px-6 py-24 sm:py-32">
+    <section className="relative overflow-hidden bg-navy text-white">
+      <Image
+        src="/images/hero-banner.jpg"
+        alt=""
+        aria-hidden="true"
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover"
+      />
+      <div className="absolute inset-0 bg-navy/85" aria-hidden="true" />
+      <div className="relative mx-auto flex max-w-5xl flex-col items-start gap-6 px-6 py-24 sm:py-32">
         <h1 className="text-3xl font-bold leading-tight sm:text-5xl">
           Te veel CV&apos;s. Te weinig tijd. Wij lossen dat op.
         </h1>
