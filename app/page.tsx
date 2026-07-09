@@ -1,7 +1,17 @@
+import Hero from "@/components/Hero";
+import HowItWorks from "@/components/HowItWorks";
+import Benefits from "@/components/Benefits";
+import SignupForm from "@/components/SignupForm";
+import Footer from "@/components/Footer";
+
 export default function Home() {
   return (
     <main>
-      <p className="p-6">TalentChart</p>
+      <Hero />
+      <HowItWorks />
+      <Benefits />
+      <SignupForm />
+      <Footer />
     </main>
   );
 }
