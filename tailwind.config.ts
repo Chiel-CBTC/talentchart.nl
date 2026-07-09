@@ -6,7 +6,8 @@ const config: Config = {
     extend: {
       colors: {
         navy: "#0F1F3D",
-        teal: "#0D9488",
+        teal: "#0A7A70",
+        "teal-light": "#14B8A6",
         offwhite: "#F8F9FA",
       },
     },

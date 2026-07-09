@@ -7,7 +7,7 @@ export default function Footer() {
         <span>&copy; {year} TalentChart. Alle rechten voorbehouden.</span>
         <a
           href="mailto:info@talentchart.nl"
-          className="text-teal hover:underline"
+          className="text-teal-light hover:underline"
         >
           info@talentchart.nl
         </a>
