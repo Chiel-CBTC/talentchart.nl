@@ -7,7 +7,7 @@ export interface SignupFormData {
 
 const RECIPIENT = "info@talentchart.nl";
 
-export function buildMailtoLink(data: SignupFormData): string {
+function composeEmail(data: SignupFormData): { subject: string; body: string } {
   const subject = `Aanmelding TalentChart — ${data.company}`;
   const bodyLines = [
     `Naam: ${data.name}`,
@@ -19,10 +19,19 @@ export function buildMailtoLink(data: SignupFormData): string {
     bodyLines.push("", "Toelichting:", data.message);
   }
 
-  const body = bodyLines.join("\n");
+  return { subject, body: bodyLines.join("\n") };
+}
+
+export function buildMailtoLink(data: SignupFormData): string {
+  const { subject, body } = composeEmail(data);
   const query = `subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
     body
   )}`;
 
   return `mailto:${RECIPIENT}?${query}`;
+}
+
+export function buildClipboardText(data: SignupFormData): string {
+  const { subject, body } = composeEmail(data);
+  return `Aan: ${RECIPIENT}\nOnderwerp: ${subject}\n\n${body}`;
 }
