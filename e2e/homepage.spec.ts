@@ -40,3 +40,40 @@ test("succesvolle aanmelding toont bevestiging met correcte mailto-link", async 
     /^mailto:info@talentchart\.nl\?subject=.*body=.*/
   );
 });
+
+test("foutmelding verdwijnt direct nadat het veld is gecorrigeerd", async ({
+  page,
+}) => {
+  await page.goto("/#aanmelden");
+
+  await page.getByRole("button", { name: "Versturen" }).click();
+  await expect(page.getByText("Vul je naam in.")).toBeVisible();
+
+  await page.getByLabel("Naam").fill("Jan Jansen");
+  await expect(page.getByText("Vul je naam in.")).not.toBeVisible();
+});
+
+test("kopieer-knop zet aanmeldgegevens op het klembord", async ({
+  page,
+  context,
+}) => {
+  await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+  await page.goto("/#aanmelden");
+
+  await page.getByLabel("Naam").fill("Jan Jansen");
+  await page.getByLabel("Bedrijf").fill("Acme BV");
+  await page.getByLabel("E-mailadres").fill("jan@acme.nl");
+  await page.getByRole("button", { name: "Versturen" }).click();
+
+  await page
+    .getByRole("button", { name: "Kopieer gegevens naar klembord" })
+    .click();
+  await expect(page.getByText("Gekopieerd!")).toBeVisible();
+
+  const clipboardText = await page.evaluate(() =>
+    navigator.clipboard.readText()
+  );
+  expect(clipboardText).toContain("Aan: info@talentchart.nl");
+  expect(clipboardText).toContain("Naam: Jan Jansen");
+  expect(clipboardText).toContain("Bedrijf: Acme BV");
+});

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, FormEvent } from "react";
-import { buildMailtoLink } from "@/lib/mailto";
+import { buildMailtoLink, buildClipboardText, SignupFormData } from "@/lib/mailto";
 
 interface FormValues {
   name: string;
@@ -26,6 +26,20 @@ export default function SignupForm() {
   >({});
   const [submitted, setSubmitted] = useState(false);
   const [mailtoHref, setMailtoHref] = useState<string | null>(null);
+  const [submittedData, setSubmittedData] = useState<SignupFormData | null>(
+    null
+  );
+  const [copied, setCopied] = useState(false);
+
+  function updateField(field: keyof FormValues, value: string) {
+    setValues((prev) => ({ ...prev, [field]: value }));
+    setErrors((prev) => {
+      if (!prev[field]) return prev;
+      const next = { ...prev };
+      delete next[field];
+      return next;
+    });
+  }
 
   function validate(): boolean {
     const nextErrors: Partial<Record<keyof FormValues, string>> = {};
@@ -49,15 +63,27 @@ export default function SignupForm() {
     if (!validate()) {
       return;
     }
-    const href = buildMailtoLink({
+    const data: SignupFormData = {
       name: values.name.trim(),
       company: values.company.trim(),
       email: values.email.trim(),
       message: values.message.trim(),
-    });
+    };
+    const href = buildMailtoLink(data);
     setMailtoHref(href);
+    setSubmittedData(data);
     setSubmitted(true);
     window.location.href = href;
+  }
+
+  async function handleCopy() {
+    if (!submittedData) return;
+    try {
+      await navigator.clipboard.writeText(buildClipboardText(submittedData));
+      setCopied(true);
+    } catch {
+      setCopied(false);
+    }
   }
 
   if (submitted) {
@@ -68,19 +94,30 @@ export default function SignupForm() {
             Bedankt voor je aanmelding!
           </h2>
           <p className="mt-4 text-slate-200">
-            Je e-mailprogramma opent met een vooraf ingevuld bericht naar
-            info@talentchart.nl. Verstuur je mail en we nemen snel contact met
-            je op.
+            Je e-mailprogramma zou nu moeten openen met een vooraf ingevuld
+            bericht naar info@talentchart.nl. Gebeurde dat niet automatisch —
+            bijvoorbeeld omdat je geen e-mailprogramma op dit apparaat hebt
+            ingesteld — kopieer je gegevens dan hieronder en plak ze in een
+            nieuwe e-mail.
           </p>
-          {mailtoHref && (
-            <a
-              href={mailtoHref}
-              data-testid="mailto-link"
-              className="mt-6 inline-block text-teal underline"
+          <div className="mt-6 flex flex-col items-center gap-3">
+            {mailtoHref && (
+              <a
+                href={mailtoHref}
+                data-testid="mailto-link"
+                className="text-teal-light underline"
+              >
+                Klik hier als je e-mailprogramma niet vanzelf opende
+              </a>
+            )}
+            <button
+              type="button"
+              onClick={handleCopy}
+              className="rounded-md border border-teal-light px-4 py-2 text-sm font-semibold text-teal-light transition hover:bg-teal-light hover:text-navy"
             >
-              Klik hier als je e-mailprogramma niet vanzelf opende
-            </a>
-          )}
+              {copied ? "Gekopieerd!" : "Kopieer gegevens naar klembord"}
+            </button>
+          </div>
         </div>
       </section>
     );
@@ -106,7 +143,7 @@ export default function SignupForm() {
               id="name"
               type="text"
               value={values.name}
-              onChange={(e) => setValues({ ...values, name: e.target.value })}
+              onChange={(e) => updateField("name", e.target.value)}
               className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-navy"
             />
             {errors.name && (
@@ -121,9 +158,7 @@ export default function SignupForm() {
               id="company"
               type="text"
               value={values.company}
-              onChange={(e) =>
-                setValues({ ...values, company: e.target.value })
-              }
+              onChange={(e) => updateField("company", e.target.value)}
               className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-navy"
             />
             {errors.company && (
@@ -138,9 +173,7 @@ export default function SignupForm() {
               id="email"
               type="email"
               value={values.email}
-              onChange={(e) =>
-                setValues({ ...values, email: e.target.value })
-              }
+              onChange={(e) => updateField("email", e.target.value)}
               className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-navy"
             />
             {errors.email && (
@@ -155,9 +188,7 @@ export default function SignupForm() {
               id="message"
               rows={4}
               value={values.message}
-              onChange={(e) =>
-                setValues({ ...values, message: e.target.value })
-              }
+              onChange={(e) => updateField("message", e.target.value)}
               className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-navy"
             />
           </div>
