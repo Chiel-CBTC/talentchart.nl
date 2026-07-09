@@ -127,6 +127,14 @@
       "css": ".ds-icon-badge { display: flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 9999px; background-color: #0A7A701A; color: #0A7A70; }"
     },
     {
+      "name": "Hero Background",
+      "kind": "custom",
+      "refersTo": "hero-background",
+      "description": "Decorative Unsplash photo behind the Hero copy, muted under a flat 85% navy overlay (not a gradient) so the existing white hero text keeps its contrast and the system stays color-block-led. alt=\"\" and aria-hidden=\"true\" since it carries no content. The only image on the page.",
+      "html": "<section class=\"ds-hero\"><img class=\"ds-hero-image\" src=\"/images/hero-banner.jpg\" alt=\"\" aria-hidden=\"true\" /><div class=\"ds-hero-overlay\" aria-hidden=\"true\"></div><div class=\"ds-hero-content\"><h1>Te veel CV's. Te weinig tijd. Wij lossen dat op.</h1></div></section>",
+      "css": ".ds-hero { position: relative; overflow: hidden; background-color: #0F1F3D; } .ds-hero-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; } .ds-hero-overlay { position: absolute; inset: 0; background-color: rgba(15, 31, 61, 0.85); } .ds-hero-content { position: relative; color: #FFFFFF; }"
+    },
+    {
       "name": "Sticky Bar",
       "kind": "nav",
       "refersTo": "sticky-bar",
@@ -142,7 +150,8 @@
       "Eén primaire kleur (navy) draagt gewicht, één accentkleur (teal, in twee belichtingen) draagt actie — geen derde concurrerende kleur.",
       "Vlak: geen shadows, geen glow, geen glassmorphism. Diepte komt van kleurblokken en een dunne rand, niet van elevatie.",
       "Eén lettertype-familie (Inter) in twee gewichten (400/600/700) — geen decoratieve tweede stem.",
-      "Eén primaire call-to-action-vorm herhaald door hero, sticky bar en formulier; één secundaire outline-knop voor de niet-primaire klembord-actie."
+      "Eén primaire call-to-action-vorm herhaald door hero, sticky bar en formulier; één secundaire outline-knop voor de niet-primaire klembord-actie.",
+      "Eén decoratief beeld, alleen in de Hero, gedempt onder een vlakke navy-overlay (85% dekking) — de rest van de pagina blijft volledig kleurblok- en typografie-gedreven."
     ],
     "rules": [
       { "name": "The Two-Color Rule", "body": "Navy draagt gewicht, teal draagt actie. Geen enkel ander kleuraccent komt erbij — geen derde 'vrolijke' kleur, geen gradient tussen de twee. Signal Teal (vulling) en Signal Teal Light (tekst-op-navy) tellen als één signaalrol in twee belichtingen, niet als een derde accent.", "section": "colors" },

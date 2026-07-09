@@ -101,6 +101,7 @@ Dit systeem wijst expliciet af wat het niet is: geen speelse consumer-SaaS look 
 - Vlak: geen shadows, geen glow, geen glassmorphism. Diepte komt van kleurblokken en een dunne rand, niet van elevatie.
 - Eén lettertype-familie (Inter) in twee gewichten (400/600/700) — geen decoratieve tweede stem.
 - Eén call-to-action-vorm herhaald door de hele pagina — de bezoeker leert 'm één keer, herkent 'm overal.
+- Eén decoratief beeld, alleen in de Hero, gedempt onder een vlakke navy-overlay (85% dekking) — de rest van de pagina blijft volledig kleurblok- en typografie-gedreven.
 
 ## 2. Colors
 
@@ -158,6 +159,9 @@ Zelfverzekerd en onopgesmukt: elke component doet precies één ding, zonder dec
 - **Primary:** achtergrond Signal Teal, tekst wit, `font-semibold`, padding 12px 24px (`px-6 py-3`). Dezelfde knop-vorm wordt hergebruikt voor de hero-CTA (`<a>`), de sticky-bar-CTA (`<a>`) en de formulier-submit (`<button>`) — één herkenbare hoofdactievorm door de hele pagina.
 - **Hover / Focus:** `opacity: 0.9` bij hover, met `transition` op alle eigenschappen. Geen kleurverandering, geen transform, geen schaduw-toename.
 - **Secondary (outline):** transparante achtergrond, 1px rand + tekst in Signal Teal Light, padding 8px 16px. Alleen gebruikt voor de "Kopieer gegevens naar klembord"-knop na een aanmelding — een bewust minder dominante actie dan de primaire knop, die zelf ook al is uitgevoerd (het formulier is al ingediend). Hover: vult met Signal Teal Light, tekst wordt navy.
+
+### Hero Background (signature component)
+Eén decoratief foto (Unsplash, vrije licentie) als achtergrond van de Hero-sectie (`object-cover`, volledige sectiebreedte/-hoogte). Erboven een vlakke navy-overlay op 85% dekking (`bg-navy/85`, geen gradient) om de bestaande witte hero-tekst leesbaar te houden en de foto ondergeschikt aan het kleursysteem te maken. Puur decoratief: `alt=""` en `aria-hidden="true"`, zodat een schermlezer 'm overslaat. Dit is het enige beeld op de pagina — geen tweede foto elders, om het systeem overwegend typografie- en kleurblok-gedreven te houden.
 
 ### Sticky Bar (signature component)
 Vast bovenaan het scherm (`fixed inset-x-0 top-0`), achtergrond navy, 1px onderrand in Signal Teal op 20% dekking (geen shadow — consistent met Elevation). Bevat de wordmark "TalentChart" (wit, `font-semibold`) en de primaire CTA-knop. Verschijnt pas nadat de bezoeker meer dan 60% van de viewporthoogte heeft gescrold (dus na de Hero), zodat de pagina boven de vouw niet dubbelop is. Transitie: `translate-y` over 200ms, met een `prefers-reduced-motion`-alternatief dat de transitie uitschakelt (directe verschijning in plaats van een schuifbeweging). Bij verborgen staat: `aria-hidden="true"` en `tabIndex="-1"` op de link, zodat toetsenbord- en schermlezergebruikers 'm niet tegenkomen voordat hij zichtbaar is.
