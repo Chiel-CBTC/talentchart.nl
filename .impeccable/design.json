@@ -1,0 +1,143 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-09T13:55:04+02:00",
+  "title": "Design System: TalentChart",
+  "extensions": {
+    "colorMeta": {
+      "navy": {
+        "role": "primary",
+        "displayName": "Ink Navy",
+        "canonical": "#0F1F3D",
+        "tonalRamp": ["#060C18", "#0A1428", "#0D1A34", "#0F1F3D", "#33415A", "#636D81", "#9FA5B1", "#DBDDE2"]
+      },
+      "teal": {
+        "role": "secondary",
+        "displayName": "Signal Teal",
+        "canonical": "#0D9488",
+        "tonalRamp": ["#053B36", "#086058", "#0B7E74", "#0D9488", "#31A499", "#62B9B1", "#9ED4CF", "#DBEFED"]
+      },
+      "offwhite": {
+        "role": "neutral",
+        "displayName": "Offwhite",
+        "canonical": "#F8F9FA",
+        "tonalRamp": ["#1A1B1D", "#3A3C3F", "#5C5F63", "#8B8E92", "#C3C5C8", "#E4E5E7", "#F8F9FA", "#FFFFFF"]
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "White",
+        "canonical": "#FFFFFF",
+        "tonalRamp": ["#141414", "#333333", "#4D4D4D", "#737373", "#A6A6A6", "#D9D9D9", "#F2F2F2", "#FFFFFF"]
+      },
+      "teal-wash": {
+        "role": "secondary",
+        "displayName": "Signal Teal Wash",
+        "canonical": "#0D94881A"
+      },
+      "teal-line": {
+        "role": "secondary",
+        "displayName": "Signal Teal Line",
+        "canonical": "#0D94884D"
+      },
+      "slate-200": {
+        "role": "neutral",
+        "displayName": "Slate 200",
+        "canonical": "#E2E8F0"
+      },
+      "slate-300": {
+        "role": "neutral",
+        "displayName": "Slate 300",
+        "canonical": "#CBD5E1"
+      },
+      "slate-600": {
+        "role": "neutral",
+        "displayName": "Slate 600",
+        "canonical": "#475569"
+      },
+      "error-300": {
+        "role": "error",
+        "displayName": "Error 300",
+        "canonical": "#FCA5A5"
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero headline only — the single kernboodschap." },
+      "headline": { "displayName": "Headline", "purpose": "Section titles (Hoe het werkt, Voordelen, Meld je aan)." },
+      "title": { "displayName": "Title", "purpose": "Card and step titles within a section." },
+      "body": { "displayName": "Body", "purpose": "Hero subline and form descriptive copy." },
+      "label": { "displayName": "Label", "purpose": "Form labels and card description text." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "ease-standard", "value": "cubic-bezier(0.4, 0, 0.2, 1)", "purpose": "Default Tailwind transition easing, used for button hover opacity." },
+      { "name": "duration-standard", "value": "150ms", "purpose": "Default Tailwind transition duration." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The only call-to-action shape in the system. Used for both the hero CTA link and the form submit button.",
+      "html": "<a href=\"#\" class=\"ds-btn-primary\">Meld je aan</a>",
+      "css": ".ds-btn-primary { display: inline-block; background-color: #0D9488; color: #FFFFFF; font-family: Inter, system-ui, sans-serif; font-weight: 600; font-size: 1rem; padding: 12px 24px; border-radius: 6px; text-decoration: none; border: none; cursor: pointer; transition: opacity 150ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-btn-primary:hover { opacity: 0.9; } .ds-btn-primary:focus-visible { opacity: 0.9; outline: 2px solid #0D9488; outline-offset: 2px; }"
+    },
+    {
+      "name": "Benefit Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Flat, bordered card used to group a benefit title and description. No shadow — depth comes from the 1px border only.",
+      "html": "<div class=\"ds-card\"><h3 class=\"ds-card-title\">Tijdsbesparing</h3><p class=\"ds-card-body\">Geen dagen meer kwijt aan het handmatig doorspitten van CV's — de eerste selectie is in minuten klaar.</p></div>",
+      "css": ".ds-card { background-color: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 8px; padding: 24px; } .ds-card-title { font-family: Inter, system-ui, sans-serif; font-weight: 600; font-size: 1rem; color: #0F1F3D; margin: 0 0 8px; } .ds-card-body { font-family: Inter, system-ui, sans-serif; font-weight: 400; font-size: 0.875rem; line-height: 1.6; color: #475569; margin: 0; }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Labeled text input used in the signup form. White background even inside the navy form section, so it reads clearly against the dark surface.",
+      "html": "<div class=\"ds-field\"><label class=\"ds-label\" for=\"ds-name\">Naam</label><input class=\"ds-input\" id=\"ds-name\" type=\"text\" /></div>",
+      "css": ".ds-label { display: block; font-family: Inter, system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; color: #FFFFFF; margin-bottom: 4px; } .ds-input { width: 100%; box-sizing: border-box; background-color: #FFFFFF; color: #0F1F3D; border: 1px solid #CBD5E1; border-radius: 6px; padding: 8px 12px; font-family: Inter, system-ui, sans-serif; font-size: 1rem; } .ds-input:focus-visible { outline: 2px solid #0D9488; outline-offset: 1px; }"
+    },
+    {
+      "name": "Step Icon Badge",
+      "kind": "custom",
+      "refersTo": "icon-badge",
+      "description": "Signature component for the 'Hoe het werkt' steps. Teal at 10% opacity as a wash, not a solid block, with the icon in full-strength teal.",
+      "html": "<div class=\"ds-icon-badge\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" width=\"24\" height=\"24\" aria-hidden=\"true\"><rect x=\"3\" y=\"5\" width=\"18\" height=\"14\" rx=\"2\"/><path d=\"M3 7l9 6 9-6\"/></svg></div>",
+      "css": ".ds-icon-badge { display: flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 9999px; background-color: #0D94881A; color: #0D9488; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Recruiter's Desk",
+    "overview": "TalentChart's marketing pagina moet aanvoelen als een tool die een recruiter zelf zou bouwen voor een andere recruiter — niet als een marketingbureau-productie. Elke vorm heeft een functie: navy geeft gewicht en vertrouwen aan het verhaal (het probleem, de belofte), teal wijst zonder omhaal naar de ene actie die telt. Geen versiering die niet ook werkt. Dit systeem wijst expliciet af wat het niet is: geen speelse consumer-SaaS look — geen felle kleuren, geen ronde illustratieve vormen, geen playful iconography. Dit is een zakelijk instrument, geen consumentenproduct.",
+    "keyCharacteristics": [
+      "Eén primaire kleur (navy) draagt gewicht, één accentkleur (teal) draagt actie — geen derde concurrerende kleur.",
+      "Vlak: geen shadows, geen glow, geen glassmorphism. Diepte komt van kleurblokken en een dunne rand, niet van elevatie.",
+      "Eén lettertype-familie (Inter) in twee gewichten (400/600/700) — geen decoratieve tweede stem.",
+      "Eén call-to-action-vorm herhaald door de hele pagina — de bezoeker leert 'm één keer, herkent 'm overal."
+    ],
+    "rules": [
+      { "name": "The Two-Color Rule", "body": "Navy draagt gewicht, teal draagt actie. Geen enkel ander kleuraccent komt erbij — geen derde 'vrolijke' kleur, geen gradient tussen de twee.", "section": "colors" },
+      { "name": "The One Voice Rule", "body": "Eén font-familie, gedragen door gewicht — geen tweede typeface, ook niet voor labels of monospace-achtige elementen.", "section": "typography" },
+      { "name": "The Flat-By-Default Rule", "body": "Geen box-shadow waar dan ook. Scheiding tussen secties komt van achtergrondkleur, niet van drop-shadow of laag-suggestie.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do navy (#0F1F3D) gebruiken voor gewicht (achtergronden, koppen) en teal (#0D9488) uitsluitend voor actie (knoppen, iconen, links).",
+      "Do dezelfde knopvorm (teal, wit, rounded-md, px-6 py-3) hergebruiken voor elke call-to-action op de pagina — nooit een tweede knopstijl introduceren.",
+      "Do vlakke kaarten met een dunne rand (1px, slate-200) gebruiken voor gegroepeerde content, nooit een schaduw.",
+      "Do Nederlandse copy schrijven, direct en zonder marketingjargon."
+    ],
+    "donts": [
+      "Don't een speelse consumer-SaaS look toevoegen: geen felle kleuren, geen ronde illustratieve iconen, geen playful iconography.",
+      "Don't een derde accentkleur introduceren naast navy en teal.",
+      "Don't box-shadow gebruiken — dit systeem is bewust vlak.",
+      "Don't gradient-text of gradient-achtergronden gebruiken op koppen of knoppen.",
+      "Don't een tweede lettertype-familie toevoegen voor 'sfeer' — gewicht binnen Inter is genoeg."
+    ]
+  }
+}
