@@ -1,0 +1,12 @@
+#!/bin/sh
+# Blocks direct commits on main/master. Use a feature branch + PR instead.
+
+branch="$(git rev-parse --abbrev-ref HEAD)"
+
+if [ "$branch" = "main" ] || [ "$branch" = "master" ]; then
+  echo "Direct commits op '$branch' zijn geblokkeerd. Maak eerst een branch:"
+  echo "  git checkout -b jouw-branch-naam"
+  exit 1
+fi
+
+exit 0
