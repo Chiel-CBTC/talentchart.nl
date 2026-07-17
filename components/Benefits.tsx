@@ -2,22 +2,22 @@ const benefits = [
   {
     title: "Tijdsbesparing",
     description:
-      "Geen dagen meer kwijt aan het handmatig doorspitten van CV's — de eerste selectie is in minuten klaar.",
+      "Geen onnodige tijd meer kwijt aan het handmatig doorspitten van CV's - de eerste selectie is in minuten klaar.",
   },
   {
-    title: "Consistente scoring",
+    title: "Betrouwbare matching",
     description:
-      "Elke kandidaat wordt op dezelfde criteria beoordeeld, zonder ruis van een lange werkdag of onderbuikgevoel.",
+      "Elke kandidaat wordt objectief en op exact dezelfde criteria beoordeeld, zonder ruis van een lange werkdag of onderbuikgevoelens.",
   },
   {
     title: "Branche-onafhankelijk",
     description:
-      "Of je nu techniek, zorg of finance werft — TalentChart matcht op basis van de vacaturetekst die jij aanlevert.",
+      "Of je nu in ICT, zorg, finance of waar dan ook werft - TalentChart matcht gewoon op basis van de vacaturetekst die jij aanlevert.",
   },
   {
     title: "Past in jouw werkproces",
     description:
-      "Je blijft vacatures insturen zoals je gewend bent. Geen nieuw systeem waar je omheen moet werken.",
+      "Je kunt je vacatures gewoon via e-mail insturen. Geen nieuw systeem waar je aan moet wennen of waar je omheen moet werken.",
   },
 ];
 

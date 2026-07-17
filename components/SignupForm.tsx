@@ -130,6 +130,10 @@ export default function SignupForm() {
         <p className="mt-2 text-slate-200">
           Laat je gegevens achter, dan nemen we contact met je op.
         </p>
+        <p className="mt-1 text-sm text-slate-300">
+          We zitten momenteel in de pilotfase: bij aanmelding zetten we samen
+          met jou je CV-pool op.
+        </p>
         <form
           className="mt-8 flex flex-col gap-4"
           onSubmit={handleSubmit}
@@ -198,6 +202,10 @@ export default function SignupForm() {
           >
             Versturen
           </button>
+          <p className="text-sm text-slate-300">
+            We gebruiken je gegevens alleen om contact met je op te nemen,
+            nooit voor iets anders.
+          </p>
         </form>
       </div>
     </section>
