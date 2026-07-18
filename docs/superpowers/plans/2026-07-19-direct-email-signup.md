@@ -195,31 +195,34 @@ export default defineConfig({
 
 - [ ] **Step 3: Write the failing test**
 
-Create `tests/sendSignupEmail.test.ts`:
+Create `tests/sendSignupEmail.test.ts`. Vitest hoists `vi.mock()` calls above imports; a factory that closes over outer variables must declare them via `vi.hoisted()` so they're initialized before the hoisted `vi.mock()` call runs (verified against the installed Vitest 2.1.9's `hoistMocks()` — there is no `mock`-prefix naming exception in this version, unlike Jest's babel-plugin-jest-hoist):
 
 ```ts
 import { describe, it, expect, vi, beforeEach } from "vitest";
 
-const sendMailMock = vi.fn();
-const createTransportMock = vi.fn(() => ({ sendMail: sendMailMock }));
+const { mockSendMail, mockCreateTransport } = vi.hoisted(() => {
+  const mockSendMail = vi.fn();
+  const mockCreateTransport = vi.fn(() => ({ sendMail: mockSendMail }));
+  return { mockSendMail, mockCreateTransport };
+});
 
 vi.mock("nodemailer", () => ({
-  default: { createTransport: createTransportMock },
+  default: { createTransport: mockCreateTransport },
 }));
 
 import { sendSignupEmail } from "../app/actions/sendSignupEmail";
 
 describe("sendSignupEmail", () => {
   beforeEach(() => {
-    sendMailMock.mockReset();
-    createTransportMock.mockClear();
+    mockSendMail.mockReset();
+    mockCreateTransport.mockClear();
     delete process.env.EMAIL_TEST_MODE;
     process.env.GMAIL_USER = "info@talentchart.nl";
     process.env.GMAIL_APP_PASSWORD = "test-app-password";
   });
 
   it("verstuurt de mail via Gmail SMTP en geeft ok:true terug bij succes", async () => {
-    sendMailMock.mockResolvedValueOnce({ messageId: "abc" });
+    mockSendMail.mockResolvedValueOnce({ messageId: "abc" });
 
     const result = await sendSignupEmail({
       name: "Jan Jansen",
@@ -228,11 +231,11 @@ describe("sendSignupEmail", () => {
     });
 
     expect(result).toEqual({ ok: true });
-    expect(createTransportMock).toHaveBeenCalledWith({
+    expect(mockCreateTransport).toHaveBeenCalledWith({
       service: "gmail",
       auth: { user: "info@talentchart.nl", pass: "test-app-password" },
     });
-    expect(sendMailMock).toHaveBeenCalledWith({
+    expect(mockSendMail).toHaveBeenCalledWith({
       to: "info@talentchart.nl",
       replyTo: "jan@acme.nl",
       subject: "Aanmelding TalentChart — Acme BV",
@@ -241,7 +244,7 @@ describe("sendSignupEmail", () => {
   });
 
   it("geeft ok:false met een Nederlandse foutmelding terug wanneer sendMail faalt", async () => {
-    sendMailMock.mockRejectedValueOnce(new Error("SMTP timeout"));
+    mockSendMail.mockRejectedValueOnce(new Error("SMTP timeout"));
 
     const result = await sendSignupEmail({
       name: "Jan Jansen",
@@ -265,7 +268,7 @@ describe("sendSignupEmail", () => {
     });
 
     expect(result).toEqual({ ok: true });
-    expect(createTransportMock).not.toHaveBeenCalled();
+    expect(mockCreateTransport).not.toHaveBeenCalled();
   });
 });
 ```
