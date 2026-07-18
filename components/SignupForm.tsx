@@ -72,16 +72,19 @@ export default function SignupForm() {
     setSending(true);
     setSubmitError(null);
 
-    const result = await sendSignupEmail(data);
-
-    setSending(false);
-
-    if (result.ok) {
-      setSubmitted(true);
-    } else {
-      setSubmitError(
-        result.error ?? "Versturen is niet gelukt. Probeer het later opnieuw."
-      );
+    try {
+      const result = await sendSignupEmail(data);
+      if (result.ok) {
+        setSubmitted(true);
+      } else {
+        setSubmitError(
+          result.error ?? "Versturen is niet gelukt. Probeer het later opnieuw."
+        );
+      }
+    } catch {
+      setSubmitError("Versturen is niet gelukt. Probeer het later opnieuw.");
+    } finally {
+      setSending(false);
     }
   }
 

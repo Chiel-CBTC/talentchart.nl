@@ -13,7 +13,7 @@ export async function sendSignupEmail(
 ): Promise<SendSignupEmailResult> {
   const payload = buildSignupEmail(data);
 
-  if (process.env.EMAIL_TEST_MODE === "true") {
+  if (process.env.NODE_ENV !== "production" && process.env.EMAIL_TEST_MODE === "true") {
     return { ok: true };
   }
 
