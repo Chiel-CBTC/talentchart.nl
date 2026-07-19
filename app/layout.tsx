@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "TalentChart — AI-matching voor recruiters",
   description:
-    "TalentChart matcht jouw vacatures razendsnel tegen je CV-pool en levert een gemotiveerde top-3 ranking.",
+    "TalentChart matcht jouw vacatures razendsnel tegen je CV-pool en levert een gemotiveerde top 3 ranking.",
 };
 
 export default function RootLayout({

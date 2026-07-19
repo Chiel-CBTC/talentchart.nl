@@ -4,7 +4,7 @@ test("hero, CTA scroll en formulier-validatie", async ({ page }) => {
   await page.goto("/");
 
   await expect(
-    page.getByRole("heading", { name: /te veel cv's/i })
+    page.getByRole("heading", { name: /stop met eindeloos cv's scannen/i })
   ).toBeVisible();
 
   await page.getByRole("link", { name: "Meld je aan" }).click();
