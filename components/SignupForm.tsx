@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, FormEvent } from "react";
-import { buildMailtoLink, buildClipboardText, SignupFormData } from "@/lib/mailto";
+import { sendSignupEmail } from "@/app/actions/sendSignupEmail";
+import { SignupFormData } from "@/lib/email";
 
 interface FormValues {
   name: string;
@@ -25,11 +26,8 @@ export default function SignupForm() {
     Partial<Record<keyof FormValues, string>>
   >({});
   const [submitted, setSubmitted] = useState(false);
-  const [mailtoHref, setMailtoHref] = useState<string | null>(null);
-  const [submittedData, setSubmittedData] = useState<SignupFormData | null>(
-    null
-  );
-  const [copied, setCopied] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   function updateField(field: keyof FormValues, value: string) {
     setValues((prev) => ({ ...prev, [field]: value }));
@@ -58,31 +56,35 @@ export default function SignupForm() {
     return Object.keys(nextErrors).length === 0;
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!validate()) {
       return;
     }
+
     const data: SignupFormData = {
       name: values.name.trim(),
       company: values.company.trim(),
       email: values.email.trim(),
       message: values.message.trim(),
     };
-    const href = buildMailtoLink(data);
-    setMailtoHref(href);
-    setSubmittedData(data);
-    setSubmitted(true);
-    window.location.href = href;
-  }
 
-  async function handleCopy() {
-    if (!submittedData) return;
+    setSending(true);
+    setSubmitError(null);
+
     try {
-      await navigator.clipboard.writeText(buildClipboardText(submittedData));
-      setCopied(true);
+      const result = await sendSignupEmail(data);
+      if (result.ok) {
+        setSubmitted(true);
+      } else {
+        setSubmitError(
+          result.error ?? "Versturen is niet gelukt. Probeer het later opnieuw."
+        );
+      }
     } catch {
-      setCopied(false);
+      setSubmitError("Versturen is niet gelukt. Probeer het later opnieuw.");
+    } finally {
+      setSending(false);
     }
   }
 
@@ -94,30 +96,9 @@ export default function SignupForm() {
             Bedankt voor je aanmelding!
           </h2>
           <p className="mt-4 text-slate-200">
-            Je e-mailprogramma zou nu moeten openen met een vooraf ingevuld
-            bericht naar info@talentchart.nl. Gebeurde dat niet automatisch —
-            bijvoorbeeld omdat je geen e-mailprogramma op dit apparaat hebt
-            ingesteld — kopieer je gegevens dan hieronder en plak ze in een
-            nieuwe e-mail.
+            We hebben je aanmelding ontvangen en nemen zo snel mogelijk
+            contact met je op.
           </p>
-          <div className="mt-6 flex flex-col items-center gap-3">
-            {mailtoHref && (
-              <a
-                href={mailtoHref}
-                data-testid="mailto-link"
-                className="text-teal-light underline"
-              >
-                Klik hier als je e-mailprogramma niet vanzelf opende
-              </a>
-            )}
-            <button
-              type="button"
-              onClick={handleCopy}
-              className="rounded-md border border-teal-light px-4 py-2 text-sm font-semibold text-teal-light transition hover:bg-teal-light hover:text-navy"
-            >
-              {copied ? "Gekopieerd!" : "Kopieer gegevens naar klembord"}
-            </button>
-          </div>
         </div>
       </section>
     );
@@ -196,11 +177,15 @@ export default function SignupForm() {
               className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-navy"
             />
           </div>
+          {submitError && (
+            <p className="text-sm text-red-300">{submitError}</p>
+          )}
           <button
             type="submit"
-            className="mt-2 rounded-md bg-teal px-6 py-3 font-semibold text-white transition hover:opacity-90"
+            disabled={sending}
+            className="mt-2 rounded-md bg-teal px-6 py-3 font-semibold text-white transition hover:opacity-90 disabled:opacity-60"
           >
-            Versturen
+            {sending ? "Versturen..." : "Versturen"}
           </button>
           <p className="text-sm text-slate-300">
             We gebruiken je gegevens alleen om contact met je op te nemen,
