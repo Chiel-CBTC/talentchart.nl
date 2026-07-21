@@ -5,7 +5,7 @@ export default function Testimonial() {
     <section className="bg-white">
       <div className="mx-auto max-w-2xl px-6 py-20">
         <div className="rounded-lg border border-slate-200 p-8 text-center">
-          <p className="text-lg text-navy sm:text-xl">
+          <p className="text-sm text-navy">
             &quot;Ik was altijd veel tijd kwijt aan het handmatig scannen van
             CV&apos;s bij nieuwe aanvragen. Ik wilde gewoon een simpele
             manier om dit proces te versnellen. Met TalentChart lukt dit
@@ -17,7 +17,7 @@ export default function Testimonial() {
             <Image
               src="/logos/matching-consultants-icon.png"
               alt="Matching Consultants"
-              width={53}
+              width={60}
               height={41}
               className="h-8 w-auto"
             />
