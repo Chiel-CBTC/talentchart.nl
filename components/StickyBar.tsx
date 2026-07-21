@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export default function StickyBar() {
@@ -21,7 +22,17 @@ export default function StickyBar() {
         visible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      <span className="font-semibold text-white">TalentChart</span>
+      <span className="flex items-center gap-2">
+        <Image
+          src="/logo-icon-white.png"
+          alt=""
+          aria-hidden="true"
+          width={18}
+          height={20}
+          className="h-5 w-auto"
+        />
+        <span className="font-semibold text-white">TalentChart</span>
+      </span>
       <a
         href="#aanmelden"
         tabIndex={visible ? 0 : -1}
