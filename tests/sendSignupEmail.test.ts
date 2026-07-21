@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 
 const { mockSendMail, mockCreateTransport } = vi.hoisted(() => {
   const mockSendMail = vi.fn();
@@ -19,6 +19,17 @@ describe("sendSignupEmail", () => {
     delete process.env.EMAIL_TEST_MODE;
     process.env.GMAIL_USER = "info@talentchart.nl";
     process.env.GMAIL_APP_PASSWORD = "test-app-password";
+    // sendSignupEmail's EMAIL_TEST_MODE guard is gated on NODE_ENV !== "production"
+    // (to stop test-mode ever leaking into a real prod deploy). Tests need a
+    // deterministic, non-"production" NODE_ENV regardless of what the host shell
+    // happens to have set (e.g. a prod server container), so pin it here via
+    // vitest's stubEnv (NODE_ENV is typed read-only, so a plain assignment
+    // doesn't type-check) — vi.unstubAllEnvs() restores the original after each test.
+    vi.stubEnv("NODE_ENV", "test");
+  });
+
+  afterEach(() => {
+    vi.unstubAllEnvs();
   });
 
   it("verstuurt de mail via Gmail SMTP en geeft ok:true terug bij succes", async () => {

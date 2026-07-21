@@ -43,8 +43,7 @@ export default function Hero() {
             Meld je aan
           </a>
           <span className="text-sm text-slate-300">
-            Pilotfase — persoonlijke onboarding, wij zetten jouw CV-pool voor
-            je op
+            Wij helpen je graag op weg — neem contact met ons op
           </span>
         </div>
       </div>
