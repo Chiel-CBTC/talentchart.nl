@@ -13,7 +13,12 @@ export default function Testimonial() {
             heb ik inzicht in wie van mijn kandidaten het meest geschikt is,
             mét een goede motivatie!&quot;
           </p>
-          <div className="mt-6 flex items-center justify-center gap-3">
+          <a
+            href="https://www.matchingconsultants.nl/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 flex items-center justify-center gap-3 transition hover:opacity-80"
+          >
             <Image
               src="/logos/matching-consultants-icon.png"
               alt="Matching Consultants"
@@ -27,7 +32,7 @@ export default function Testimonial() {
               </span>
               eigenaar Matching Consultants
             </span>
-          </div>
+          </a>
         </div>
       </div>
     </section>
