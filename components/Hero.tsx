@@ -19,11 +19,11 @@ export default function Hero() {
             src="/logo-icon-white.png"
             alt=""
             aria-hidden="true"
-            width={33}
-            height={36}
-            className="h-9 w-auto"
+            width={40}
+            height={44}
+            className="h-11 w-auto"
           />
-          <span className="text-xl font-semibold text-white">
+          <span className="text-2xl font-semibold text-white">
             TalentChart
           </span>
         </span>

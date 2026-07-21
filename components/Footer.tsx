@@ -10,9 +10,9 @@ export default function Footer() {
             src="/logo-icon-white.png"
             alt=""
             aria-hidden="true"
-            width={22}
-            height={24}
-            className="h-6 w-auto"
+            width={26}
+            height={28}
+            className="h-7 w-auto"
           />
           <span className="font-semibold text-white">TalentChart</span>
         </span>

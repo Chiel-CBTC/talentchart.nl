@@ -27,9 +27,9 @@ export default function StickyBar() {
           src="/logo-icon-white.png"
           alt=""
           aria-hidden="true"
-          width={18}
-          height={20}
-          className="h-5 w-auto"
+          width={22}
+          height={24}
+          className="h-6 w-auto"
         />
         <span className="font-semibold text-white">TalentChart</span>
       </span>
