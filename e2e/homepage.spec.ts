@@ -47,3 +47,27 @@ test("foutmelding verdwijnt direct nadat het veld is gecorrigeerd", async ({
   await page.getByLabel("Naam").fill("Jan Jansen");
   await expect(page.getByText("Vul je naam in.")).not.toBeVisible();
 });
+
+test("testimonial-sectie toont citaat van Matching Consultants tussen privacy-note en aanmeldformulier", async ({
+  page,
+}) => {
+  await page.goto("/");
+
+  const quote = page.getByText(/handmatig scannen van cv's/i);
+  await expect(quote).toBeVisible();
+  await expect(page.getByText("Joris van Aalst")).toBeVisible();
+  await expect(
+    page.getByRole("img", { name: "Matching Consultants" })
+  ).toBeVisible();
+
+  const privacyBox = await page
+    .getByRole("heading", { name: "Privacy & data" })
+    .boundingBox();
+  const quoteBox = await quote.boundingBox();
+  const signupBox = await page
+    .getByRole("heading", { name: "Meld je aan" })
+    .boundingBox();
+
+  expect(privacyBox?.y).toBeLessThan(quoteBox?.y ?? Infinity);
+  expect(quoteBox?.y).toBeLessThan(signupBox?.y ?? Infinity);
+});
