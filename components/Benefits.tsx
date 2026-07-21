@@ -26,7 +26,7 @@ export default function Benefits() {
     <section className="bg-white">
       <div className="mx-auto max-w-5xl px-6 py-20">
         <h2 className="text-center text-2xl font-bold text-navy sm:text-3xl">
-          Waarom recruiters TalentChart gebruiken
+          Waarom TalentChart?
         </h2>
         <div className="mt-12 grid gap-8 sm:grid-cols-2">
           {benefits.map((benefit) => (
