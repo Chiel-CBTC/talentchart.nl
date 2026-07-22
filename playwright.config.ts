@@ -16,5 +16,19 @@ export default defineConfig({
     baseURL: "http://localhost:3000",
     trace: "on-first-retry",
   },
-  projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
+  projects: [
+    {
+      name: "chromium",
+      use: {
+        ...devices["Desktop Chrome"],
+        // Playwright's own downloaded Chromium is a glibc build and cannot run
+        // on this Alpine/musl server. CI (Ubuntu, glibc) is unaffected since
+        // this env var is unset there. Locally on this server, point at the
+        // Alpine-native chromium package instead (`apk add --no-cache chromium`).
+        ...(process.env.PLAYWRIGHT_LOCAL_CHROMIUM
+          ? { launchOptions: { executablePath: process.env.PLAYWRIGHT_LOCAL_CHROMIUM } }
+          : {}),
+      },
+    },
+  ],
 });
