@@ -35,17 +35,12 @@ export default function Hero() {
           matchen jouw vacatures razendsnel tegen jouw CV-pool en leveren je
           binnen 10 minuten een top 3 van best matchende kandidaten.
         </p>
-        <div className="flex flex-col items-start gap-2">
-          <a
-            href="#aanmelden"
-            className="rounded-md bg-teal px-6 py-3 font-semibold text-white transition hover:opacity-90"
-          >
-            Meld je aan
-          </a>
-          <span className="text-sm text-slate-300">
-            Wij helpen je graag op weg — neem contact met ons op
-          </span>
-        </div>
+        <a
+          href="#aanmelden"
+          className="rounded-md bg-teal px-6 py-3 font-semibold text-white transition hover:opacity-90"
+        >
+          Meld je aan
+        </a>
       </div>
     </section>
   );
