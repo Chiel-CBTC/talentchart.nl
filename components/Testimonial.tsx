@@ -4,7 +4,10 @@ export default function Testimonial() {
   return (
     <section className="bg-white">
       <div className="mx-auto max-w-2xl px-6 py-20">
-        <div className="rounded-lg border border-slate-200 p-8 text-center">
+        <h2 className="text-center text-2xl font-bold text-navy sm:text-3xl">
+          Wat klanten zeggen
+        </h2>
+        <div className="mt-12 rounded-lg border border-slate-200 p-8 text-center">
           <p className="text-sm text-navy">
             &quot;Ik was altijd veel tijd kwijt aan het handmatig scannen van
             CV&apos;s bij nieuwe aanvragen. Ik wilde gewoon een simpele
