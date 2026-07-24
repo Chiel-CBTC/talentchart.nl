@@ -2,12 +2,12 @@ const benefits = [
   {
     title: "Tijdsbesparing",
     description:
-      "Geen onnodige tijd meer kwijt aan het handmatig doorspitten van CV's - de eerste selectie is in minuten klaar.",
+      "Geen onnodige tijd meer kwijt aan het handmatig schrijven van AI-prompts.",
   },
   {
     title: "Betrouwbare matching",
     description:
-      "Elke kandidaat wordt objectief en op exact dezelfde criteria beoordeeld, zonder ruis van een lange werkdag of onderbuikgevoelens.",
+      "Dezelfde vacature levert altijd dezelfde top 3 op, dus zonder de wisselende resultaten die AI vaak geeft bij dezelfde vraag.",
   },
   {
     title: "Branche-onafhankelijk",
@@ -17,7 +17,12 @@ const benefits = [
   {
     title: "Past in jouw werkproces",
     description:
-      "Je kunt je vacatures gewoon via e-mail insturen. Geen nieuw systeem waar je aan moet wennen of waar je omheen moet werken.",
+      "Je kunt je vacatures gewoon via e-mail insturen. Geen aparte tool nodig, geen nieuw systeem om aan te wennen - het kan gewoon niet makkelijker.",
+  },
+  {
+    title: "AVG-conform",
+    description:
+      "Je cv's blijven binnen een veilige, AVG-conforme omgeving - in plaats van in een algemene AI-chat waar je niet weet wat ermee gebeurt.",
   },
 ];
 
@@ -28,7 +33,7 @@ export default function Benefits() {
         <h2 className="text-center text-2xl font-bold text-navy sm:text-3xl">
           Waarom TalentChart?
         </h2>
-        <div className="mt-12 grid gap-8 sm:grid-cols-2">
+        <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {benefits.map((benefit) => (
             <div
               key={benefit.title}
